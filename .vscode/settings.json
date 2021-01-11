@@ -1,0 +1,7 @@
+{
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "dart.lineLength": 180,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  }
+  
