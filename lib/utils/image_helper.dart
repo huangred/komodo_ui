@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'debug.dart';
 
 class ImageHelper {
-  ///获取图片的宽高值
-  static Future<Size> getImageSize(String imageUrl) async {
+  ///获取图片的宽高值, source可以是url或者Uint8List
+  static Future<Size> getImageSize(dynamic source) async {
     Completer<Size> completer = Completer();
 
-    Image image = Image.network(imageUrl);
+    Image image = source is String ? Image.network(source) : Image.memory(source);
+
     ImageStream imageStream = image.image.resolve(ImageConfiguration());
 
     imageStream.addListener(

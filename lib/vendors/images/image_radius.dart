@@ -2,15 +2,11 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
 import '../../style/default_style.dart';
 
 class ImageRadius extends StatelessWidget {
-  ///图片地址, 可以是url string, Uint8List, File, multi_image_picker控件专用的Asset
+  ///图片地址, 可以是url string, Uint8List, File, assetName
   final dynamic source;
-
-  ///app中内置asset图片
-  final String assetName;
 
   ///圆角
   final BorderRadius radius;
@@ -40,7 +36,6 @@ class ImageRadius extends StatelessWidget {
     this.radius,
     this.width,
     this.height,
-    this.assetName,
     this.fit = BoxFit.cover,
     this.onClick,
     this.margin,
@@ -67,25 +62,23 @@ class ImageRadius extends StatelessWidget {
 
   Widget get _image {
     if (this.source is String)
-      return CachedNetworkImage(
-        imageUrl: this.source,
-        fit: fit,
-        width: this.width,
-        height: this.height,
-        fadeInDuration: DefaultStyle.animationDurationFast,
-        fadeOutDuration: DefaultStyle.animationDurationFast,
-        placeholderFadeInDuration: DefaultStyle.animationDurationFast,
-        errorWidget: (context, url, error) => this.errorholder ?? _Error(height: this.height, width: this.width, backgroundColor: this.backgroundColor),
-        placeholder: (context, url) => this.palceholder ?? _PlaceHolder(height: this.height, width: this.width, backgroundColor: this.backgroundColor),
-      );
-
-    if (this.assetName.isNotEmpty) return Image.asset(this.assetName, fit: _fit, width: _width, height: _height);
+      return source.toLowerCase().startsWith('http')
+          ? CachedNetworkImage(
+              imageUrl: this.source,
+              fit: fit,
+              width: this.width,
+              height: this.height,
+              fadeInDuration: DefaultStyle.animationDurationFast,
+              fadeOutDuration: DefaultStyle.animationDurationFast,
+              placeholderFadeInDuration: DefaultStyle.animationDurationFast,
+              errorWidget: (context, url, error) => this.errorholder ?? _Error(height: this.height, width: this.width, backgroundColor: this.backgroundColor),
+              placeholder: (context, url) => this.palceholder ?? _PlaceHolder(height: this.height, width: this.width, backgroundColor: this.backgroundColor),
+            )
+          : Image.asset(this.source, fit: _fit, width: _width, height: _height);
 
     if (this.source is File) return Image.file(this.source, fit: _fit, width: _width, height: _height);
 
     if (this.source is Uint8List) return Image.memory(this.source, fit: _fit, width: _width, height: _height);
-
-    if (this.source is Asset) return AssetThumb(asset: this.source, width: _width.truncate(), height: _height.truncate());
 
     return _Error(height: this.height, width: this.width, backgroundColor: this.backgroundColor);
   }

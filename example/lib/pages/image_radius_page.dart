@@ -31,7 +31,7 @@ class _ImageRadiusPageState extends State<ImageRadiusPage> {
           Center(child: Text('Asset Aame')),
           Center(
             child: ImageRadius(
-              assetName: 'assets/x7.jpg',
+              source: 'assets/x7.jpg',
               height: 200,
               width: 200,
             ),
