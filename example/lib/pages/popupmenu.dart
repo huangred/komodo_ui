@@ -30,8 +30,19 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
         children: [
           IPopupMenu(
             child: Container(
+              width: 250,
+              height: 60,
+              color: Colors.green,
+              child: Text('Click'),
+            ),
+            meunItems: _getItems(),
+          ),
+          SizedBox(height: 20),
+          IPopupMenu(
+            child: Container(
               width: 350,
               height: 60,
+              margin: EdgeInsets.only(left: 10),
               color: Colors.green,
               child: Text('Click'),
             ),
@@ -70,17 +81,7 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
           SizedBox(height: 20),
           IPopupMenu(
             child: Container(
-              width: 350,
-              height: 60,
-              color: Colors.green,
-              child: Text('Click'),
-            ),
-            meunItems: _getItems(),
-          ),
-          SizedBox(height: 20),
-          IPopupMenu(
-            child: Container(
-              width: 350,
+              width: 250,
               height: 60,
               color: Colors.green,
               child: Text('Click'),
