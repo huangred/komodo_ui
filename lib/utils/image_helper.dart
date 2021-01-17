@@ -29,7 +29,7 @@ class ImageHelper {
   }
 
   ///生成图片缩略图
-  Future<String> resize({String imagePath, double maxWidth = 1600, double maxHeight = 1200, int quality = 100}) async {
+  static Future<String> resize({String imagePath, double maxWidth = 1600, double maxHeight = 1200, int quality = 100}) async {
     String ret = await ImageNativeResizer.resize(
       imagePath: imagePath,
       maxWidth: maxWidth,
