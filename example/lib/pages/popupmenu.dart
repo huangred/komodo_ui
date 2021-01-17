@@ -12,100 +12,136 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Popup Menu'),
-        actions: [
-          IPopupMenu(
-            child: Icon(Icons.more_horiz),
-            meunItems: _getItems(),
-          ),
-          IPopupMenu(
-            child: Icon(Icons.more_vert),
-            meunItems: _getItems(),
-          ),
-          SizedBox(width: 10),
-        ],
-      ),
-      body: Column(
-        children: [
-          IPopupMenu(
-            child: Container(
-              width: 250,
-              height: 60,
-              color: Colors.green,
-              child: Text('Click'),
+        appBar: AppBar(
+          title: Text('Popup Menu'),
+          actions: [
+            IPopupMenu(
+              child: Icon(Icons.more_horiz),
+              meunItems: _getItems(),
             ),
-            meunItems: _getItems(),
-          ),
-          SizedBox(height: 20),
-          IPopupMenu(
-            child: Container(
-              width: 350,
-              height: 60,
-              margin: EdgeInsets.only(left: 10),
-              color: Colors.green,
-              child: Text('Click'),
+            IPopupMenu(
+              child: Icon(Icons.more_vert),
+              meunItems: _getItems(),
             ),
-            meunItems: _getItems(),
-          ),
-          SizedBox(height: 20),
-          IPopupMenu(
-            child: Container(
-              width: 350,
-              height: 60,
-              color: Colors.green,
-              child: Text('Click'),
+            SizedBox(width: 10),
+          ],
+        ),
+        body: ListView(
+          children: [
+            getChildren(true),
+            SizedBox(height: 20),
+            getChildren(false),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _menu('left'),
+                _menu('center'),
+                _menu('right'),
+              ],
             ),
-            meunItems: _getItems(),
-          ),
-          SizedBox(height: 20),
-          IPopupMenu(
-            child: Container(
-              width: 350,
-              height: 60,
-              color: Colors.green,
-              child: Text('Click'),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _menu('left'),
+                _menu('center'),
+                _menu('right'),
+              ],
             ),
-            meunItems: _getItems(),
-          ),
-          SizedBox(height: 20),
-          IPopupMenu(
-            child: Container(
-              width: 350,
-              height: 60,
-              color: Colors.green,
-              child: Text('Click'),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _menu('left'),
+                _menu('center'),
+                _menu('right'),
+              ],
             ),
-            meunItems: _getItems(),
-          ),
-          SizedBox(height: 20),
-          IPopupMenu(
-            child: Container(
-              width: 250,
-              height: 60,
-              color: Colors.green,
-              child: Text('Click'),
+            SizedBox(height: 20),
+            Container(
+              color: Colors.grey,
+              child: Text('xxxxxxxxxxxx'),
+              height: 600,
             ),
-            meunItems: _getItems(),
+          ],
+        ));
+  }
+
+  Widget getChildren(bool left) {
+    return Column(
+      crossAxisAlignment: left ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+      children: [
+        IPopupMenu(
+          child: Container(
+            width: 50,
+            height: 60,
+            color: Colors.green,
+            child: Text('Click'),
           ),
-          SizedBox(height: 20),
-          IPopupMenu(
-            child: Container(
-              width: 350,
-              height: 60,
-              color: Colors.green,
-              child: Text('Click'),
-            ),
-            meunItems: _getItems(),
+          meunItems: _getItems(),
+        ),
+        SizedBox(height: 20),
+        IPopupMenu(
+          child: Container(
+            width: 100,
+            height: 60,
+            color: Colors.green,
+            child: Text('Click'),
           ),
-        ],
-      ),
-      // Stack(
-      //   children: [
-      //     for (double x = -1; x <= 1; x = x + 0.5)
-      //       for (double y = -1; y <= 1; y = y + 0.25) Align(alignment: Alignment(x, y), child: _menu('$x, $y')),
-      //   ],
-      // ),
+          meunItems: _getItems(),
+        ),
+        SizedBox(height: 20),
+        IPopupMenu(
+          child: Container(
+            width: 150,
+            height: 60,
+            color: Colors.green,
+            child: Text('Click'),
+          ),
+          meunItems: _getItems(),
+        ),
+        SizedBox(height: 20),
+        IPopupMenu(
+          child: Container(
+            width: 200,
+            height: 60,
+            color: Colors.green,
+            child: Text('Click'),
+          ),
+          meunItems: _getItems(),
+        ),
+        SizedBox(height: 20),
+        IPopupMenu(
+          child: Container(
+            width: 250,
+            height: 60,
+            color: Colors.green,
+            child: Text('Click'),
+          ),
+          meunItems: _getItems(),
+        ),
+        SizedBox(height: 20),
+        IPopupMenu(
+          child: Container(
+            width: 300,
+            height: 60,
+            color: Colors.green,
+            child: Text('Click'),
+          ),
+          meunItems: _getItems(),
+        ),
+        SizedBox(height: 20),
+        IPopupMenu(
+          child: Container(
+            width: 350,
+            height: 60,
+            color: Colors.green,
+            child: Text('Click'),
+          ),
+          meunItems: _getItems(),
+        ),
+      ],
     );
   }
 

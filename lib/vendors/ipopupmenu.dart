@@ -164,13 +164,13 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
   void _onAfterRendering(Duration timeStamp) {
     final RenderBox renderBox = _key.currentContext.findRenderObject();
 
-    _maxWidth = renderBox.size.width;
+    maxWidth = renderBox.size.width;
     setState(() {});
   }
 
   ArrowPosition _arrowPosition;
   GlobalKey _key = GlobalKey();
-  double _maxWidth;
+  double maxWidth;
 
   @override
   void initState() {
@@ -197,12 +197,7 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
     double menuLeft, menuTop, menuBottom;
     double arrowLeft, arrowTop, arrowBottom;
 
-    if (_arrowPosition == null) {
-      if (isTop)
-        _arrowPosition = ArrowPosition.Top;
-      else
-        _arrowPosition = ArrowPosition.Bottom;
-    }
+    if (_arrowPosition == null) _arrowPosition = isTop ? ArrowPosition.Top : ArrowPosition.Bottom;
 
     if (_arrowPosition == ArrowPosition.Right) {
       menuLeft = dx - widget.arrowHeight;
@@ -225,45 +220,27 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
     }
 
     if (_arrowPosition == ArrowPosition.Top) {
-      menuLeft = (isLeft ? dx : dx) + widget.menuLeftOffset;
-      menuTop = (dy + h + widget.arrowHeight) + widget.menuTopOffset;
-
       arrowLeft = (dx + w / 2 - widget.arrowWidth / 2) + widget.arrowLeftOffset;
       arrowTop = dy + h + widget.arrowTopOffset;
 
-      if (menuLeft + (_maxWidth ?? 0) > screenW) {
-        menuLeft = (isLeft ? dx : screenW - _maxWidth - widget.size.width * 0.2) + widget.menuLeftOffset;
-        menuTop = (dy + h + widget.arrowHeight) + widget.menuTopOffset;
-      }
+      if (isLeft)
+        menuLeft = arrowLeft - widget.arrowWidth + widget.menuLeftOffset;
+      else
+        menuLeft = arrowLeft - (maxWidth ?? 0) + widget.arrowWidth * 1.5 + widget.menuLeftOffset;
 
-      if (menuLeft <= 0) {
-        menuLeft = (isLeft ? widget.size.width * 0.2 : screenW - _maxWidth - widget.size.width * 0.2) + widget.menuLeftOffset;
-
-        menuTop = (dy + h + widget.arrowHeight) + widget.menuTopOffset;
-      }
-
-      if (menuLeft + (_maxWidth ?? 0) <= arrowLeft) menuLeft = arrowLeft - (_maxWidth ?? 0) + widget.arrowWidth * 1.5 + widget.menuLeftOffset;
+      menuTop = arrowTop + widget.arrowHeight + widget.menuTopOffset;
     }
 
     if (_arrowPosition == ArrowPosition.Bottom) {
-      menuLeft = isLeft ? dx : dx;
-      menuBottom = screenH - dy + widget.arrowHeight;
-
       arrowLeft = dx + w / 2 - widget.arrowWidth / 2;
       arrowBottom = screenH - dy;
 
-      if (menuLeft + (_maxWidth ?? 0) > screenW) {
-        menuLeft = (isLeft ? dx : screenW - _maxWidth - widget.size.width * 0.2) + widget.menuLeftOffset;
-        menuBottom = screenH - dy + widget.arrowHeight;
-      }
+      if (isLeft)
+        menuLeft = arrowLeft - widget.arrowWidth + widget.menuLeftOffset;
+      else
+        menuLeft = arrowLeft - (maxWidth ?? 0) + widget.arrowWidth * 1.5 + widget.menuLeftOffset;
 
-      if (menuLeft <= 0) {
-        menuLeft = (isLeft ? widget.size.width * 0.2 : screenW - _maxWidth - widget.size.width * 0.2) + widget.menuLeftOffset;
-
-        menuBottom = screenH - dy + widget.arrowHeight;
-      }
-
-      if (menuLeft + (_maxWidth ?? 0) <= arrowLeft) menuLeft = arrowLeft - (_maxWidth ?? 0) + widget.arrowWidth * 1.5 + widget.menuLeftOffset;
+      menuBottom = arrowBottom + widget.arrowHeight;
     }
 
     return Material(
@@ -321,7 +298,7 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
 
     for (var i = 0; i < len; i++) {
       children.add(items[i]);
-      if (i < len - 1) children.add(Container(width: _maxWidth, color: widget.dividerColor ?? Colors.white12, height: 0.5));
+      if (i < len - 1) children.add(Container(width: maxWidth, color: widget.dividerColor ?? Colors.white12, height: 0.5));
     }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: children);
@@ -338,7 +315,7 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
 
     current = Container(
       padding: widget.itemPadding ?? EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      width: _maxWidth,
+      width: maxWidth,
       child: current,
     );
 
