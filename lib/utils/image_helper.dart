@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:image_native_resizer/image_native_resizer.dart';
 
 import 'debug.dart';
 
@@ -25,6 +26,18 @@ class ImageHelper {
     );
 
     return completer.future;
+  }
+
+  ///生成图片缩略图
+  Future<String> resize({String imagePath, double maxWidth = 1600, double maxHeight = 1200, int quality = 100}) async {
+    String ret = await ImageNativeResizer.resize(
+      imagePath: imagePath,
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+      quality: quality,
+    );
+
+    return ret;
   }
 
   ///选取单张图片

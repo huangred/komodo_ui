@@ -23,6 +23,7 @@ dependencies:
   bot_toast: 3.0.5
   photo_view: 0.10.3
   intl: 0.16.1
+  image_native_resizer: 0.1.2
 
 dev_dependencies:
   flutter_test:

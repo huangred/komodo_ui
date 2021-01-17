@@ -205,6 +205,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.1"
+  image_native_resizer:
+    dependency: transitive
+    description:
+      name: image_native_resizer
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.2"
   image_picker:
     dependency: transitive
     description:
