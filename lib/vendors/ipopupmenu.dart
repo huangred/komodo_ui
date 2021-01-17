@@ -238,6 +238,7 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
 
       if (menuLeft <= 0) {
         menuLeft = (isLeft ? widget.size.width * 0.2 : screenW - _maxWidth - widget.size.width * 0.2) + widget.menuLeftOffset;
+        if (menuLeft + (_maxWidth ?? 0) <= arrowLeft) menuLeft = arrowLeft - (_maxWidth ?? 0) + widget.arrowWidth * 1.5 + widget.menuLeftOffset;
         menuTop = (dy + h + widget.arrowHeight) + widget.menuTopOffset;
       }
     }
@@ -256,6 +257,7 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
 
       if (menuLeft <= 0) {
         menuLeft = (isLeft ? widget.size.width * 0.2 : screenW - _maxWidth - widget.size.width * 0.2) + widget.menuLeftOffset;
+        if (menuLeft + (_maxWidth ?? 0) <= arrowLeft) menuLeft = arrowLeft - (_maxWidth ?? 0) + widget.arrowWidth * 1.5 + widget.menuLeftOffset;
         menuBottom = screenH - dy + widget.arrowHeight;
       }
     }
