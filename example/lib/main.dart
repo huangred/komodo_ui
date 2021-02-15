@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:komodo_ui/komodo_ui.dart';
 import 'pages/button_page.dart';
 import 'pages/cell_page.dart';
+import 'pages/datetime_page.dart';
 import 'pages/image_carousel_page.dart';
 import 'pages/popupmenu.dart';
 import 'pages/image_radius_page.dart';
@@ -87,4 +88,5 @@ List<StudyItem> _studyItems = [
   StudyItem('Price', PricePage()),
   StudyItem('Picker', PickerPage()),
   StudyItem('Tag', TagPage()),
+  StudyItem('DateTime', DateTimePage()),
 ];
