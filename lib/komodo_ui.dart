@@ -14,6 +14,7 @@ export 'vendors/messagebox.dart';
 export 'vendors/ipicker.dart';
 export 'vendors/ipopupmenu.dart';
 export 'vendors/price.dart';
+export 'vendors/itag.dart';
 export 'utils/extensions/datetime_extension.dart';
 export 'utils/extensions/string_extension.dart';
 export 'utils/debug.dart';

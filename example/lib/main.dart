@@ -1,3 +1,4 @@
+import 'package:example/pages/tag_page.dart';
 import 'package:flutter/material.dart';
 import 'package:komodo_ui/komodo_ui.dart';
 import 'pages/button_page.dart';
@@ -85,4 +86,5 @@ List<StudyItem> _studyItems = [
   StudyItem('Button', ButtonPage()),
   StudyItem('Price', PricePage()),
   StudyItem('Picker', PickerPage()),
+  StudyItem('Tag', TagPage()),
 ];
