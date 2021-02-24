@@ -3,7 +3,7 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 
 class ImageUploader extends StatefulWidget {
   ///是否显示选择图片的图标
-  final bool showUpload;
+  final bool showUploadIcon;
 
   ///是否开启图片多选
   final bool multiple;
@@ -17,7 +17,7 @@ class ImageUploader extends StatefulWidget {
     Key key,
     this.images,
     this.assets,
-    this.showUpload = true,
+    this.showUploadIcon = true,
     this.multiple = true,
     this.maxCount = 9,
   }) : super(key: key);
