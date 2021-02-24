@@ -9,7 +9,7 @@ bool get isDebug {
 }
 
 class LogHelper {
-  static err(dynamic exception, dynamic stackTrace) {
+  static err(dynamic exception, {dynamic stackTrace}) {
     print(err.toString());
     if (stackTrace != null) print(stackTrace.toString());
   }

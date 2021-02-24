@@ -5,6 +5,7 @@ import 'pages/button_page.dart';
 import 'pages/cell_page.dart';
 import 'pages/datetime_page.dart';
 import 'pages/image_carousel_page.dart';
+import 'pages/image_page.dart';
 import 'pages/popupmenu.dart';
 import 'pages/image_radius_page.dart';
 import 'pages/imagegroup_page.dart';
@@ -89,4 +90,5 @@ List<StudyItem> _studyItems = [
   StudyItem('Picker', PickerPage()),
   StudyItem('Tag', TagPage()),
   StudyItem('DateTime', DateTimePage()),
+  StudyItem('ImagePage', ImagePage()),
 ];
