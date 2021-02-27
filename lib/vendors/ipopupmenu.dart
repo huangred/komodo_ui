@@ -39,6 +39,7 @@ class IPopupMenu extends StatefulWidget {
   final Color maskColor;
   final Color backgroundColor;
   final Color dividerColor;
+  final bool longPress;
 
   IPopupMenu({
     @required this.child,
@@ -57,6 +58,7 @@ class IPopupMenu extends StatefulWidget {
     this.maskColor,
     this.backgroundColor,
     this.dividerColor,
+    this.longPress = false,
   });
   @override
   _IPopupMenuState createState() => _IPopupMenuState();
@@ -74,10 +76,18 @@ class _IPopupMenuState extends State<IPopupMenu> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: widget.child,
-      onTapDown: (TapDownDetails details) {
-        WidgetsBinding.instance.addPostFrameCallback(_onAfterRendering);
-        setState(() {});
-      },
+      onLongPress: widget.longPress
+          ? () {
+              WidgetsBinding.instance.addPostFrameCallback(_onAfterRendering);
+              setState(() {});
+            }
+          : null,
+      onTap: widget.longPress
+          ? null
+          : () {
+              WidgetsBinding.instance.addPostFrameCallback(_onAfterRendering);
+              setState(() {});
+            },
     );
   }
 

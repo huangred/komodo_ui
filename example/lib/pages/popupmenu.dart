@@ -28,6 +28,22 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
         ),
         body: ListView(
           children: [
+            IPopupMenu(
+              child: Center(
+                child: Container(
+                  color: Colors.green,
+                  width: 100,
+                  height: 60,
+                  child: Text('Long Press'),
+                ),
+              ),
+              longPress: true,
+              meunItems: _getItems(),
+              //maskColor: Colors.pink,
+              // backgroundColor: Colors.red,
+              // dividerColor: Colors.green,
+            ),
+            SizedBox(height: 20),
             getChildren(true),
             SizedBox(height: 20),
             getChildren(false),
