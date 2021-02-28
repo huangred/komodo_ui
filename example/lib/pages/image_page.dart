@@ -11,7 +11,7 @@ class ImagePage extends StatefulWidget {
 
 class _ImagePageState extends State<ImagePage> {
   String _source;
-  List<Asset> _images;
+  List<String> _images;
 
   @override
   Widget build(BuildContext context) {
@@ -32,25 +32,26 @@ class _ImagePageState extends State<ImagePage> {
           SizedBox(height: 10),
           Center(
             child: GestureDetector(
-              onTap: () => ImageHelper.getImage().then((ret) {
+              onTap: () => FileHelper.getFiles().then((ret) {
                 if (ret == null) return;
 
-                setState(() => _source = ret.path);
+                setState(() => _source = ret.paths[0]);
               }),
               child: Text('Get Image'),
             ),
           ),
           SizedBox(height: 20),
-          Center(
-            child: Text('Image Group'),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: ImagesGroup(images: _images ?? []),
           ),
           SizedBox(height: 10),
           Center(
             child: GestureDetector(
-              onTap: () => ImageHelper.getImages(maxImages: 9).then((ret) async {
-                if (ret == null || ret.length == 0) return;
+              onTap: () => FileHelper.getFiles(allowMultiple: true).then((ret) async {
+                if (ret == null || ret.count == 0) return;
 
-                setState(() => _images = ret);
+                setState(() => _images = ret.paths);
               }),
               child: Text('Get Images'),
             ),

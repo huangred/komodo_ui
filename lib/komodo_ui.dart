@@ -21,5 +21,5 @@ export 'utils/debug.dart';
 export 'utils/image_helper.dart';
 export 'utils/navigation.dart';
 export 'utils/screen_helper.dart';
-
-export 'package:multi_image_picker/multi_image_picker.dart';
+export 'utils/file_helper.dart';
+export 'package:file_picker/file_picker.dart';

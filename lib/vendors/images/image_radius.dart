@@ -74,7 +74,9 @@ class ImageRadius extends StatelessWidget {
               errorWidget: (context, url, error) => this.errorholder ?? _Error(height: this.height, width: this.width, backgroundColor: this.backgroundColor),
               placeholder: (context, url) => this.palceholder ?? _PlaceHolder(height: this.height, width: this.width, backgroundColor: this.backgroundColor),
             )
-          : Image.asset(this.source, fit: _fit, width: _width, height: _height);
+          : source.startsWith('/')
+              ? Image.file(File(this.source), fit: _fit, width: _width, height: _height)
+              : Image.asset(this.source, fit: _fit, width: _width, height: _height);
 
     if (this.source is File) return Image.file(this.source, fit: _fit, width: _width, height: _height);
 
