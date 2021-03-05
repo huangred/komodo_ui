@@ -21,7 +21,7 @@ class ImageCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context, shadowThemeOnly: true);
+    final ThemeData theme = Theme.of(context /* , shadowThemeOnly: true */);
 
     final Widget pageChild = ImageCarouselView(
       showNavigation: showNavigation,
