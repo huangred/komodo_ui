@@ -230,7 +230,7 @@ packages:
     dependency: transitive
     description:
       name: js
-      url: "https://pub.dartlang.org"
+      url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.3"
   komodo_ui:
