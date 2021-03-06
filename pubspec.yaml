@@ -3,7 +3,7 @@ description: ui utils
 version: 0.0.1
 author: Leo
 homepage: http://github.com
-publish_to: 'none'
+publish_to: none
 environment:
   sdk: ">=2.7.0 <3.0.0"
   flutter: ">=1.17.0"
