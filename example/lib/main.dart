@@ -4,6 +4,7 @@ import 'package:komodo_ui/komodo_ui.dart';
 import 'pages/button_page.dart';
 import 'pages/cell_page.dart';
 import 'pages/datetime_page.dart';
+import 'pages/iheader_page.dart';
 import 'pages/image_carousel_page.dart';
 import 'pages/image_page.dart';
 import 'pages/popupmenu.dart';
@@ -91,4 +92,5 @@ List<StudyItem> _studyItems = [
   StudyItem('Tag', TagPage()),
   StudyItem('DateTime', DateTimePage()),
   StudyItem('ImagePage', ImagePage()),
+  StudyItem('IBackHeader', IBackHeaderPage()),
 ];
