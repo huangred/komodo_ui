@@ -12,21 +12,23 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Popup Menu'),
-          actions: [
-            IPopupMenu(
-              child: Icon(Icons.more_horiz),
-              meunItems: _getItems(),
-            ),
-            IPopupMenu(
-              child: Icon(Icons.more_vert),
-              meunItems: _getItems(),
-            ),
-            SizedBox(width: 10),
-          ],
-        ),
-        body: ListView(
+      appBar: AppBar(
+        title: Text('Popup Menu'),
+        actions: [
+          IPopupMenu(
+            child: Icon(Icons.more_horiz),
+            meunItems: _getItems(),
+          ),
+          IPopupMenu(
+            child: Icon(Icons.more_vert),
+            meunItems: _getItems(),
+          ),
+          SizedBox(width: 10),
+        ],
+      ),
+      body: GestureDetector(
+        onTap: () => print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
+        child: ListView(
           children: [
             IPopupMenu(
               child: Center(
@@ -81,7 +83,9 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
               height: 600,
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   Widget getChildren(bool left) {

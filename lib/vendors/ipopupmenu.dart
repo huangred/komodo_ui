@@ -40,7 +40,7 @@ class IPopupMenu extends StatefulWidget {
   final Color backgroundColor;
   final Color dividerColor;
   final bool longPress;
-
+  final HitTestBehavior behavior;
   IPopupMenu({
     @required this.child,
     @required this.meunItems,
@@ -59,6 +59,7 @@ class IPopupMenu extends StatefulWidget {
     this.backgroundColor,
     this.dividerColor,
     this.longPress = false,
+    this.behavior,
   });
   @override
   _IPopupMenuState createState() => _IPopupMenuState();
@@ -75,6 +76,7 @@ class _IPopupMenuState extends State<IPopupMenu> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: widget.behavior,
       child: widget.child,
       onLongPress: widget.longPress
           ? () {

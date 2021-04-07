@@ -6,9 +6,6 @@ class SafeSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (this.top == false)
-      return SizedBox(height: MediaQuery.of(context).padding.bottom);
-    else
-      return SizedBox(height: MediaQuery.of(context).padding.top);
+    return !this.top ? SizedBox(height: MediaQuery.of(context).padding.bottom) : SizedBox(height: MediaQuery.of(context).padding.top);
   }
 }
