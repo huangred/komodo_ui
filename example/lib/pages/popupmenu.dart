@@ -12,6 +12,7 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text('Popup Menu'),
         actions: [
@@ -46,6 +47,8 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
               // dividerColor: Colors.green,
             ),
             SizedBox(height: 20),
+            TextField(),
+            SizedBox(height: 20),
             getChildren(true),
             SizedBox(height: 20),
             getChildren(false),
@@ -77,11 +80,6 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
               ],
             ),
             SizedBox(height: 20),
-            Container(
-              color: Colors.grey,
-              child: Text('xxxxxxxxxxxx'),
-              height: 600,
-            ),
           ],
         ),
       ),

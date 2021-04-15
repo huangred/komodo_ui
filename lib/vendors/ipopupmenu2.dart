@@ -66,35 +66,40 @@ class IPopupMenu extends StatefulWidget {
 }
 
 class _IPopupMenuState extends State<IPopupMenu> {
-  void _onAfterRendering(Duration timeStamp) {
-    RenderObject renderObject = context.findRenderObject();
-    Size size = renderObject.paintBounds.size;
-    var vector3 = renderObject.getTransformTo(null)?.getTranslation();
-    _showMenu(context, size, vector3);
+  RenderObject renderObject;
+  OverlayEntry entry;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((call) {
+      renderObject = context.findRenderObject();
+      // size = renderObject.paintBounds.size;
+      // vector3 = renderObject.getTransformTo(null)?.getTranslation();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: widget.behavior,
-      child: widget.child,
-      onLongPress: widget.longPress
-          ? () {
-              WidgetsBinding.instance.addPostFrameCallback(_onAfterRendering);
-              setState(() {});
-            }
-          : null,
-      onTap: widget.longPress
-          ? null
-          : () {
-              WidgetsBinding.instance.addPostFrameCallback(_onAfterRendering);
-              setState(() {});
-            },
+    return WillPopScope(
+      onWillPop: () {
+        if (entry != null) {
+          removeOverlay();
+          return Future.value(false);
+        }
+        return Future.value(true);
+      },
+      child: GestureDetector(
+        behavior: widget.behavior,
+        child: widget.child,
+        onLongPress: widget.longPress ? onTap : null,
+        onTap: widget.longPress ? null : onTap,
+      ),
     );
   }
 
-  _showMenu(BuildContext context, Size size, var vector3) {
-    Widget current = _RenderPopupMenu(
+  void onTap() {
+    Widget menuWidget = _RenderPopupMenu(
       meunItems: widget.meunItems,
       arrowPosition: widget.arrowPosition,
       child: widget.child,
@@ -108,23 +113,21 @@ class _IPopupMenuState extends State<IPopupMenu> {
       arrowTopOffset: widget.arrowTopOffset,
       arrowBottomOffset: widget.arrowBottomOffset,
       itemPadding: widget.itemPadding,
-      size: size,
-      vector3: vector3,
+      renderObject: renderObject,
       maskColor: widget.maskColor,
       backgroundColor: widget.backgroundColor,
       dividerColor: widget.dividerColor,
+      onRemove: () => removeOverlay(),
     );
 
-    return showGeneralDialog(
-      context: context,
-      transitionDuration: Duration(milliseconds: 150),
-      barrierDismissible: false,
-      useRootNavigator: true,
-      barrierColor: Colors.transparent,
-      pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
-        return current;
-      },
-    );
+    entry = OverlayEntry(builder: (context) => menuWidget);
+
+    Overlay.of(context).insert(entry);
+  }
+
+  void removeOverlay() {
+    entry.remove();
+    entry = null;
   }
 }
 
@@ -142,11 +145,11 @@ class _RenderPopupMenu extends StatefulWidget {
   final double arrowTopOffset;
   final double arrowBottomOffset;
   final EdgeInsetsGeometry itemPadding;
-  final Size size;
-  final dynamic vector3;
   final Color maskColor;
   final Color backgroundColor;
   final Color dividerColor;
+  final Function onRemove;
+  final RenderObject renderObject;
 
   _RenderPopupMenu({
     @required this.child,
@@ -162,41 +165,37 @@ class _RenderPopupMenu extends StatefulWidget {
     this.arrowTopOffset,
     this.arrowBottomOffset,
     this.itemPadding,
-    this.size,
-    this.vector3,
     this.maskColor,
     this.backgroundColor,
     this.dividerColor,
+    this.onRemove,
+    this.renderObject,
   });
   @override
   _RenderPopupMenuState createState() => _RenderPopupMenuState();
 }
 
 class _RenderPopupMenuState extends State<_RenderPopupMenu> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didUpdateWidget(covariant _RenderPopupMenu oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  void _onAfterRendering(Duration timeStamp) {
-    final RenderBox renderBox = _key.currentContext.findRenderObject();
-
-    maxWidth = renderBox.size.width;
-    setState(() {});
-  }
-
   ArrowPosition _arrowPosition;
   GlobalKey _key = GlobalKey();
   double maxWidth;
+  Size size;
+  dynamic vector3;
+
+  void _onAfterRendering(Duration timeStamp) {
+    final RenderBox renderBox = _key.currentContext.findRenderObject();
+    maxWidth = renderBox.size.width;
+
+    setState(() {});
+  }
 
   @override
   void initState() {
+    size = widget.renderObject.paintBounds.size;
+    vector3 = widget.renderObject.getTransformTo(null)?.getTranslation();
+
     WidgetsBinding.instance.addPostFrameCallback(_onAfterRendering);
+
     super.initState();
   }
 
@@ -206,12 +205,10 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
   }
 
   Widget _showMenu() {
-    print('xxxxxxxxxxxxx=dy' + widget.vector3[1].toString());
-
-    final double w = widget.size.width;
-    final double h = widget.size.height;
-    final double dx = widget.vector3[0];
-    final double dy = widget.vector3[1];
+    final double w = size.width;
+    final double h = size.height;
+    final double dx = vector3[0];
+    final double dy = vector3[1];
     final double screenW = MediaQuery.of(context).size.width;
     final double screenH = MediaQuery.of(context).size.height;
 
@@ -286,9 +283,7 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
                   height: double.infinity,
                   child: Text(''),
                 ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
+                onTap: () => widget.onRemove(),
               ),
               Positioned(
                 left: menuLeft,
