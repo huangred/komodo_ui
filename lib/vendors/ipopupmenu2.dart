@@ -347,7 +347,7 @@ class _RenderPopupMenuState extends State<_RenderPopupMenu> {
 
     current = GestureDetector(
       onTap: () {
-        Navigator.of(context).pop();
+        widget.onRemove();
         item.click?.call();
       },
       child: current,
