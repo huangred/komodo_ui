@@ -47,11 +47,11 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
               // dividerColor: Colors.green,
             ),
             SizedBox(height: 20),
-            TextField(),
-            SizedBox(height: 20),
             getChildren(true),
             SizedBox(height: 20),
             getChildren(false),
+            SizedBox(height: 20),
+            TextField(),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,7 +135,7 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
             width: 250,
             height: 60,
             color: Colors.green,
-            child: Text('Click'),
+            child: Text('Clickxxxxxxxxxxxx'),
           ),
           meunItems: _getItems(),
         ),
@@ -178,6 +178,26 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
 
   List<MenuItem> _getItems() {
     return [
+      MenuItem(
+        iconData: Icons.delete_outline,
+        title: '删除',
+        click: () {},
+      ),
+      MenuItem(
+        iconData: Icons.delete_outline,
+        title: '删除',
+        click: () {},
+      ),
+      MenuItem(
+        iconData: Icons.delete_outline,
+        title: '删除',
+        click: () {},
+      ),
+      MenuItem(
+        iconData: Icons.delete_outline,
+        title: '删除',
+        click: () {},
+      ),
       MenuItem(
         iconData: Icons.delete_outline,
         title: '删除',

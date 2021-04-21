@@ -23,7 +23,7 @@ dependencies:
   photo_view: 0.10.3
   intl: 0.17.0
   image_native_resizer: 0.1.2
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
