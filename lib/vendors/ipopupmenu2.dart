@@ -250,20 +250,26 @@ class _MenuLayout extends MultiChildLayoutDelegate {
       position.dx + (targetSize.width - menuSize.width) * 0.5,
       isTop ? position.dy + targetSize.height + arrowSize.height : position.dy - menuSize.height - arrowSize.height,
     );
+    itemsOffset = itemsOffset + menuOffset;
+
+    Offset triangleOffset = Offset(
+      position.dx + (targetSize.width - arrowSize.width) * 0.5,
+      isTop ? position.dy + targetSize.height : position.dy - arrowSize.height,
+    );
+    triangleOffset = triangleOffset + arrowOffset;
 
     if (itemsOffset.dx <= 0) itemsOffset = Offset(this.minMargin, itemsOffset.dy);
     if (itemsOffset.dx + menuSize.width >= screenW) itemsOffset = Offset(screenW - menuSize.width - this.minMargin, itemsOffset.dy);
 
-    positionChild(_MenuChildIds.item, itemsOffset + menuOffset);
+    if (itemsOffset.dy + menuSize.height > screenH) //被点击的元素高度太大，需特殊处理
+    {
+      itemsOffset = Offset(itemsOffset.dx, screenH - menuSize.height);
+      triangleOffset = Offset(triangleOffset.dx, screenH - menuSize.height - arrowSize.height);
+    }
 
-    positionChild(
-      _MenuChildIds.arrow,
-      Offset(
-            position.dx + (targetSize.width - arrowSize.width) * 0.5,
-            isTop ? position.dy + targetSize.height : position.dy - arrowSize.height,
-          ) +
-          arrowOffset,
-    );
+    positionChild(_MenuChildIds.item, itemsOffset);
+
+    positionChild(_MenuChildIds.arrow, triangleOffset);
   }
 
   @override
@@ -312,7 +318,7 @@ class MenuPanel extends StatelessWidget {
     Widget current = Row(children: [icon, SizedBox(width: 5), title]);
 
     current = Container(
-      padding: this.itemPadding ?? EdgeInsets.fromLTRB(10, 8, 12, 8),
+      padding: this.itemPadding ?? EdgeInsets.fromLTRB(10, 8, 14, 8),
       decoration: index == meunItems.length - 1 ? BoxDecoration() : BoxDecoration(border: Border(bottom: BorderSide(color: this.dividerColor ?? Colors.white12, width: 0.5))),
       child: current,
     );

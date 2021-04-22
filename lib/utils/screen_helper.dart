@@ -1,6 +1,5 @@
 import 'dart:ui' as ui show window;
 import 'package:flutter/material.dart';
-import 'navigation.dart';
 
 class ScreenHelper {
   /// 屏幕宽
@@ -16,5 +15,5 @@ class ScreenHelper {
   static double get toolBarHeight => kToolbarHeight;
 
   ///底部安全距离高度
-  static double get bottomPadding => MediaQuery.of(Navigation.context).padding.bottom;
+  static double get bottomPadding => MediaQueryData.fromWindow(ui.window).padding.bottom;
 }
