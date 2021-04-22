@@ -55,7 +55,6 @@ class IPopupMenu extends StatefulWidget {
 
 class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
   RenderObject renderObject;
-  RenderBox overlay;
   OverlayEntry entry;
 
   double width;
@@ -64,6 +63,7 @@ class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+
     super.dispose();
   }
 
@@ -77,7 +77,10 @@ class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance.addObserver(this);
 
-    WidgetsBinding.instance.addPostFrameCallback((call) => renderObject = context.findRenderObject());
+    WidgetsBinding.instance.addPostFrameCallback((call) {
+      if (!mounted) return;
+      renderObject = context.findRenderObject();
+    });
 
     super.initState();
   }
@@ -122,7 +125,7 @@ class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
     entry = OverlayEntry(builder: (context) => menuWidget);
 
     Overlay.of(context).insert(entry);
-    if (mounted) setState(() {});
+    setState(() {});
   }
 
   void removeOverlay() {
