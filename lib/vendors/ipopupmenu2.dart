@@ -122,7 +122,7 @@ class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
     entry = OverlayEntry(builder: (context) => menuWidget);
 
     Overlay.of(context).insert(entry);
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void removeOverlay() {
