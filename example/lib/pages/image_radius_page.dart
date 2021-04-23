@@ -42,7 +42,7 @@ class _ImageRadiusPageState extends State<ImageRadiusPage> {
               source: 'http://auto4.sinaimg.cn/autoimg/car/16/85/131578516_950.jpg',
               height: 200,
               width: 200,
-              onClick: () => Navigation.openPage(PopupMenuPage()),
+              onClick: () => Navigation.open(PopupMenuPage()),
             ),
           ),
           Center(child: Text('default placeholder')),

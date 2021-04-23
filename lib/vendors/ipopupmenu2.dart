@@ -69,6 +69,7 @@ class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
 
   @override
   void didChangeMetrics() {
+    print('xxxxxxxxxxxxxxxxxxxxxxx');
     removeOverlay(); //键盘关闭的时候隐藏弹出的菜单
     super.didChangeMetrics();
   }

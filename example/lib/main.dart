@@ -14,6 +14,7 @@ import 'pages/loading_page.dart';
 import 'pages/messagebox_page.dart';
 import 'pages/picker_page.dart';
 import 'pages/price_page.dart';
+import 'pages/route_animation/route_animation_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -66,7 +67,7 @@ class _IndexPageState extends State<IndexPage> {
       child: Text(item.title),
     );
 
-    current = InkWell(onTap: () async => await Navigation.openPage(item.page), child: current);
+    current = InkWell(onTap: () async => await Navigation.open(item.page), child: current);
 
     return current;
   }
@@ -93,4 +94,5 @@ List<StudyItem> _studyItems = [
   StudyItem('DateTime', DateTimePage()),
   StudyItem('ImagePage', ImagePage()),
   StudyItem('IBackHeader', IBackHeaderPage()),
+  StudyItem('Route Animation', RouteAnimationPage()),
 ];
