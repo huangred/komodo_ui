@@ -32,6 +32,7 @@ class IPopupMenu extends StatefulWidget {
   final bool longPress;
   final HitTestBehavior behavior;
   final double minMargin;
+  final bool disabled;
 
   IPopupMenu({
     @required this.child,
@@ -48,6 +49,7 @@ class IPopupMenu extends StatefulWidget {
     this.longPress = false,
     this.behavior,
     this.minMargin = 8.0,
+    this.disabled = false,
   });
   @override
   _IPopupMenuState createState() => _IPopupMenuState();
@@ -69,7 +71,6 @@ class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
 
   @override
   void didChangeMetrics() {
-    print('xxxxxxxxxxxxxxxxxxxxxxx');
     removeOverlay(); //键盘关闭的时候隐藏弹出的菜单
     super.didChangeMetrics();
   }
@@ -99,8 +100,8 @@ class _IPopupMenuState extends State<IPopupMenu> with WidgetsBindingObserver {
       child: GestureDetector(
         behavior: widget.behavior,
         child: widget.child,
-        onLongPress: widget.longPress ? onTap : null,
-        onTap: widget.longPress ? null : onTap,
+        onLongPress: widget.longPress && !widget.disabled ? onTap : null,
+        onTap: widget.longPress || widget.disabled ? null : onTap,
       ),
     );
   }
@@ -262,6 +263,7 @@ class _MenuLayout extends MultiChildLayoutDelegate {
     );
     triangleOffset = triangleOffset + arrowOffset;
 
+    //如果菜单显示超出屏幕则修正
     if (itemsOffset.dx <= 0) itemsOffset = Offset(this.minMargin, itemsOffset.dy);
     if (itemsOffset.dx + menuSize.width >= screenW) itemsOffset = Offset(screenW - menuSize.width - this.minMargin, itemsOffset.dy);
 
