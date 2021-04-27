@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   dio: 3.0.10
-  shared_preferences: ^2.0.5 
+  shared_preferences: 0.5.12+4 
   cached_network_image: 2.5.0
   flutter_swiper: 1.1.6
   flutter_picker: 1.1.5
@@ -23,7 +23,7 @@ dependencies:
   photo_view: 0.10.3
   intl: 0.17.0
   image_native_resizer: 0.1.2
-  path_provider: ^2.0.1
+  path_provider: 1.6.27
 
 dev_dependencies:
   flutter_test:
