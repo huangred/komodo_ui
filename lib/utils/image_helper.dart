@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_native_resizer/image_native_resizer.dart';
-import 'navigation.dart';
 import 'debug.dart';
 
 class ImageHelper {
@@ -41,21 +39,21 @@ class ImageHelper {
   }
 
   ///图片剪裁
-  static Future crop(String imageFilePath, {double ratioX, double ratioY}) async {
-    dynamic image = await ImageCropper.cropImage(
-        sourcePath: imageFilePath,
-        cropStyle: CropStyle.rectangle,
-        aspectRatio: CropAspectRatio(ratioX: ratioX ?? 1.0, ratioY: ratioY ?? 1.0),
-        androidUiSettings: AndroidUiSettings(
-          toolbarTitle: '图片编辑',
-          toolbarColor: Theme.of(Navigation.context).primaryColor,
-          statusBarColor: Theme.of(Navigation.context).primaryColor,
-          toolbarWidgetColor: Colors.white,
-          lockAspectRatio: true,
-          hideBottomControls: false,
-        ),
-        iosUiSettings: IOSUiSettings(title: '图片编辑', aspectRatioLockDimensionSwapEnabled: true, rotateButtonsHidden: true, rotateClockwiseButtonHidden: true));
+  // static Future crop(String imageFilePath, {double ratioX, double ratioY}) async {
+  //   dynamic image = await ImageCropper.cropImage(
+  //       sourcePath: imageFilePath,
+  //       cropStyle: CropStyle.rectangle,
+  //       aspectRatio: CropAspectRatio(ratioX: ratioX ?? 1.0, ratioY: ratioY ?? 1.0),
+  //       androidUiSettings: AndroidUiSettings(
+  //         toolbarTitle: '图片编辑',
+  //         toolbarColor: Theme.of(Navigation.context).primaryColor,
+  //         statusBarColor: Theme.of(Navigation.context).primaryColor,
+  //         toolbarWidgetColor: Colors.white,
+  //         lockAspectRatio: true,
+  //         hideBottomControls: false,
+  //       ),
+  //       iosUiSettings: IOSUiSettings(title: '图片编辑', aspectRatioLockDimensionSwapEnabled: true, rotateButtonsHidden: true, rotateClockwiseButtonHidden: true));
 
-    return image;
-  }
+  //   return image;
+  // }
 }
