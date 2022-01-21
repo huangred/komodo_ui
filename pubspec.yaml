@@ -1,7 +1,6 @@
 name: komodo_ui
 description: ui utils
 version: 0.0.1
-author: Leo
 homepage: http://github.com
 publish_to: none
 environment:
@@ -19,10 +18,10 @@ dependencies:
   file_picker: 3.0.3
   permission_handler: 8.1.2
   bot_toast: 4.0.1
-  photo_view: 0.11.1
+  photo_view: 0.13.0
   intl: 0.17.0
   image_native_resizer: 0.1.2
-  path_provider: 2.0.2
+  path_provider: 2.0.8
 
 dev_dependencies:
   flutter_test:
